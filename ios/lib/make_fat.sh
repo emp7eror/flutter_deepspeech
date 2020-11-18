@@ -1,0 +1,1 @@
+lipo -create libdeepspeech_arm64.a libdeepspeech_x86_64.a libdeepspeech_armv7.a -output libdeepspeech.a
