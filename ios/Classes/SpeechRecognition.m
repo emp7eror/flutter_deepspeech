@@ -44,9 +44,7 @@ static NSString * DStoNS(char * ds_result){
                         ], &model);
         printDSErrorIfNeed(result, "Failed to create model", return nil;)
         if (scorerPath) {
-            result = DS_EnableExternalScorer(model, [scorerPath cStringUsingEncoding:NSUTF8StringEncoding
-                                            ]);
-//
+            result = DS_EnableExternalScorer(model, [scorerPath cStringUsingEncoding:NSUTF8StringEncoding]);
             printDSErrorIfNeed(result, "Failed to append scorer", return nil;)
         }
         listener = [[RealtimeAudioListener alloc] initWithSampleRate:16000 andFrame:64];

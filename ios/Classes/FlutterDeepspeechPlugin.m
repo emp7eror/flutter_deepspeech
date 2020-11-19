@@ -43,9 +43,9 @@ const NSString* _finishListeningMethod = @"finish";
   if ([_initSpeechMethod isEqualToString:call.method]) {
       [self initSpeechRecognition:call result:result];
   } else if ([_startListeningMethod isEqualToString:call.method]){
-      [self startSpeechRecognition:call result:result];
+      [self startListening:call result:result];
   } else if ([_finishListeningMethod isEqualToString:call.method]){
-      [self finishSpeechRecognition:call result:result];
+      [self finishListening:call result:result];
   }  else {
     result(FlutterMethodNotImplemented);
   }
@@ -60,20 +60,26 @@ const NSString* _finishListeningMethod = @"finish";
     }
 
     if (![[NSFileManager defaultManager] fileExistsAtPath:modelPath]){
-        result([FlutterError errorWithCode:@"MODEL_FILE_NOT_EXIST" message:@"Model file is not exists" details:nil]);
+        result([FlutterError errorWithCode:@"MODEL_FILE_IS_NOT_EXISTS" message:@"Model file is not exists" details:nil]);
         return;
     }
 
     NSNumber * threshold = call.arguments[_partialThresholdArgKey];
+
     if (threshold == nil){
         result([FlutterError errorWithCode:@"THRESHOLD_NOT_SPECIFIED" message:@"Threshold not specified" details:nil]);
+        return;
+    }
+
+    if (threshold.intValue < 256 && powerof2(threshold.intValue)){
+        result([FlutterError errorWithCode:@"THRESHOLD_INVALID" message:@"Threshold should be > 256" details:nil]);
         return;
     }
 
     NSString *scorerPath = call.arguments[_scorerPathArgKey];
 
     if (scorerPath != nil && ![[NSFileManager defaultManager] fileExistsAtPath:scorerPath]){
-        result([FlutterError errorWithCode:@"SCORER_FILE_NOT_EXIST" message:@"Scorer file is not exists" details:nil]);
+        result([FlutterError errorWithCode:@"SCORER_FILE_IS_NOT_EXISTS" message:@"Scorer file is not exists" details:nil]);
         return;
     }
 
@@ -82,7 +88,7 @@ const NSString* _finishListeningMethod = @"finish";
     result(@"OK");
 }
 
--(void) startSpeechRecognition:(FlutterMethodCall*)call result:(FlutterResult)result
+-(void) startListening:(FlutterMethodCall*)call result:(FlutterResult)result
 {
     if (recognition == nil){
         result([FlutterError errorWithCode:@"SPEECH_NOT_INITIALIZED" message:@"initialize speech service" details:nil]);
@@ -90,10 +96,10 @@ const NSString* _finishListeningMethod = @"finish";
     }
 
     [recognition start];
-    result(nil);
+    result(@"OK");
 }
 
--(void) finishSpeechRecognition:(FlutterMethodCall*)call result:(FlutterResult)result
+-(void) finishListening:(FlutterMethodCall*)call result:(FlutterResult)result
 {
     if (recognition == nil){
         result([FlutterError errorWithCode:@"SPEECH_NOT_INITIALIZED" message:@"initialize speech service" details:nil]);

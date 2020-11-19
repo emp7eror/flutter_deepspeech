@@ -34,6 +34,7 @@ class _MyAppState extends State<MyApp> {
     final buffer = fileBytes.buffer;
     await file.writeAsBytes(
         buffer.asUint8List(fileBytes.offsetInBytes, fileBytes.lengthInBytes));
+    print("$fileName moved from assets folder");
     return file;
   }
 
