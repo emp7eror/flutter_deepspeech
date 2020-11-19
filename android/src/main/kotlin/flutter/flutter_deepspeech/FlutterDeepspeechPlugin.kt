@@ -1,5 +1,7 @@
 package flutter.flutter_deepspeech
 
+import android.os.Handler
+import android.os.Looper
 import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.EventChannel
@@ -34,6 +36,7 @@ class FlutterDeepspeechPlugin: FlutterPlugin, MethodCallHandler, EventChannel.St
   private lateinit var channel : MethodChannel
   private lateinit var eventChannel: EventChannel
   private var eventSink: EventChannel.EventSink?=null
+  private val uiThreadHandler: Handler = Handler(Looper.getMainLooper())
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     channel = MethodChannel(flutterPluginBinding.binaryMessenger, Keys.methodChannel)
@@ -112,7 +115,9 @@ class FlutterDeepspeechPlugin: FlutterPlugin, MethodCallHandler, EventChannel.St
       return
     }
     speechRecognition!!.finish { res ->
-        result.success(res)
+        uiThreadHandler.post {
+            result.success(res)
+        }
     }
   }
 
@@ -128,7 +133,9 @@ class FlutterDeepspeechPlugin: FlutterPlugin, MethodCallHandler, EventChannel.St
     }
     this.eventSink = events
     this.speechRecognition!!.intermediateResult = {
-        this.eventSink?.success(it)
+        uiThreadHandler.post {
+            this.eventSink?.success(mapOf("result" to it))
+        }
     }
   }
 
