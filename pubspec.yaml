@@ -1,8 +1,8 @@
 name: flutter_deepspeech
-description: Deepspeech for flutter
+description: Deepspeech for flutter (Arabic)
 version: 0.0.1
-author:
-homepage:
+#author: Eqra
+homepage: http://eqratech.com
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -38,6 +38,7 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   #
+
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
   #
