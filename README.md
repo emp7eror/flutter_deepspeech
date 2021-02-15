@@ -1,34 +1,43 @@
 # flutter_deepspeech Eqra Version (Al Fateha)
-## EQRATECH.COM | Feras Melhem | 0799449242
-## Getting Started
-## 1- add to (pubspec.yaml) under dependencies (maybe you need to change username) :
+# EQRATECH.COM | Feras Melhem | 0799449242
+# Getting Started
+# 1- add to (pubspec.yaml) under dependencies (maybe you need to change username) :
+
+```python
 
   flutter_deepspeech:
     git:
       url: https://feras_m@bitbucket.org/feras_m/flutter_deepspeech.git
       ref: master
-
+```
   
 
 ## ## #### ## #### ## #### ## ## # ## #### ## #### ## #### ## ##
 ## 2- add (android/app/build.gradle) in dependencies (last line) :
 
+```python
+
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   
+```
 
 ## ## #### ## #### ## #### ## ## # ## #### ## #### ## #### ## ##
 
 
 ## 3- add (android/app/src/main/AndroidManifest.xml) in <manifest> :
 
+
+```python
  <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
  <uses-permission android:name="android.permission.RECORD_AUDIO" />
+```
 
 ## ## #### ## #### ## #### ## ## # ## #### ## #### ## #### ## ##
 
 
 ## 4- in (android/app/src/main/kotlin/<project name>/MainActivity.kt) :
   ## 4- 1- before import add ":
+```python
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -36,8 +45,9 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.core.app.ActivityCompat
-
+```
   ## 4- 2- inside "Flutter Activiy()){ ":
+```python
 
    private fun checkAudioPermission() {
         // Permission is automatically granted on SDK < 23 upon installation.
@@ -54,9 +64,12 @@ import androidx.core.app.ActivityCompat
         super.onCreate(savedInstanceState)
         checkAudioPermission()
     }
-
+```
 ## ## #### ## #### ## #### ## #### ## #### ## #### ## #### ## #### ## #### ## ##
 ## then in main or any lib file use the example down :
+
+```python
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -173,3 +186,4 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+```
