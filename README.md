@@ -1,7 +1,8 @@
 # flutter_deepspeech Eqra Version (Al Fateha)
 # EQRATECH.COM | Feras Melhem | 0799449242
 # Getting Started
-# 1- add to (pubspec.yaml) under dependencies (maybe you need to change username) :
+# 1- add to (pubspec.yaml)  :
+  ## 1- 1- under dependencies (maybe you need to change username) ":
 
 ```python
 
@@ -10,7 +11,14 @@
       url: https://feras_m@bitbucket.org/feras_m/flutter_deepspeech.git
       ref: master
 ```
+  ## 1- 2- under assets (copy assets file from example of the project) then add below to pubspec.yaml ":
+  ```python
   
+  assets:
+    - assets/arabic.scorer
+    - assets/arabic.tfliter
+    
+```
 
 ## ## #### ## #### ## #### ## ## # ## #### ## #### ## #### ## ##
 ## 2- add (android/app/build.gradle) in dependencies (last line) :
