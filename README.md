@@ -12,11 +12,15 @@
       ref: master
 ```
   ## 1- 2- under assets (copy assets file from example of the project) then add below to pubspec.yaml ":
-  ```python
   
+  
+```python
+
+
   assets:
     - assets/arabic.scorer
     - assets/arabic.tfliter
+    
     
 ```
 
